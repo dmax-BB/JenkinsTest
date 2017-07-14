@@ -26,5 +26,6 @@ try{
 
 def syncTest() {
   print "Starting syncTest"
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:rails/rails.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rails']]]
   print "syncTest complete"
 }
