@@ -10,6 +10,7 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 node{
   for ( e in repoMap ) {
     myBuilds[e.key] = this.performSync(e.key, e.value)
+    print "key = ${e.key}, value = ${e.value}"
   }
 }
 try{
