@@ -13,6 +13,9 @@ node{
     for ( e in repoMap ) {
       //myBuilds[e.key] = this.syncTest()
       print "$e.key $e.value"
+      def a = e.key
+      def b = e.value
+      myBuilds[a] = { print "${a}  ${b}\n" }
     }
   }
 }
