@@ -24,11 +24,6 @@ try{
   throw e
 }
 
-def performSync(String repoName, String repoURL){
-  print "repoName = ${repoName}, repoURL = ${repoURL}"
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:rails/rails.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rails']]]
-}
-
 def syncTest() {
   print "Starting syncTest"
   print "syncTest complete"
