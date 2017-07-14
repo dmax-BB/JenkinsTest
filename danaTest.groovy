@@ -15,7 +15,8 @@ node{
       print "$e.key $e.value"
       def a = e.key
       def b = e.value
-      myBuilds[a] = { print "${a}  ${b}\n" }
+      print "$a $b"
+      //myBuilds[a] = { print "${a}  ${b}\n" }
     }
   }
 }
