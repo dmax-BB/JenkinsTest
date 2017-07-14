@@ -11,7 +11,7 @@ node{
 
   stage('MyParallel') {
     for ( e in repoMap ) {
-      myBuilds[e.key] = this.syncTest()
+      //myBuilds[e.key] = this.syncTest()
       print "e.key e.value"
     }
   }
