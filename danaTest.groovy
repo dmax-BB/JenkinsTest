@@ -15,7 +15,7 @@ node{
 
   stage('MyParallel') {
     for ( e in repoMap ) {
-      myBuilds[e.key] = this.performSync(e.key, e.value)
+      myBuilds[e.key] = performSync(e.key, e.value)
     }
   }
 }
