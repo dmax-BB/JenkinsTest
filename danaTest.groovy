@@ -17,6 +17,8 @@ node{
       myBuilds[e.key] = syncTest()
     }
   }
+
+  echo "${myBuilds.toString()}"
 }
 try{
   stage('RunParallel'){
