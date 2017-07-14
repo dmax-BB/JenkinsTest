@@ -8,17 +8,13 @@ repoMap.put('react','git@github.com:facebook/react.git')
 repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node{
-  for ( e in repoMap ) {
-    print "key = ${e.key}, value = ${e.value}"
-  }
 
   stage('MyParallel') {
     for ( e in repoMap ) {
       myBuilds[e.key] = syncTest()
     }
+  print "${myBuilds.toString()}"
   }
-
-  echo "${myBuilds.toString()}"
 }
 try{
   stage('RunParallel'){
