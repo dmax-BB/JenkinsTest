@@ -17,7 +17,7 @@ node{
 }
 try{
   stage('RunParallel'){
-  parallel myBuilds
+  parallel myBuilds, failFast: true
   }
 } catch (Exception e){
   throw e
