@@ -21,5 +21,5 @@ try{
 }
 
 def Closure performSync(String repoName, String repoURL){
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: '${repoURL}']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '${repoName}']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${repoURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${repoName}"]]]
 }
