@@ -10,6 +10,7 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 node{
   for ( e in repoMap ) {
     print "key = ${e.key}, value = ${e.value}"
+    this.performSync(e.key, e.value)
   }
 
   stage('MyParallel') {
