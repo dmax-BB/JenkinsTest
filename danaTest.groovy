@@ -13,7 +13,6 @@ node{
     for ( e in repoMap ) {
       myBuilds[e.key] = syncTest()
     }
-  print "${myBuilds.toString()}"
   }
 }
 try{
