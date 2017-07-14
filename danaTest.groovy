@@ -1,19 +1,16 @@
 def myBuilds = [:]
+def repoMap = [:]
+repoMap.put('rails','git@github.com:rails/rails.git')
+repoMap.put('tensorflow','git@github.com:tensorflow/tensorflow.git')
+repoMap.put('bootstrap','git@github.com:twbs/bootstrap.git')
+repoMap.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.git')
+repoMap.put('react','git@github.com:facebook/react.git')
+repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node{
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:rails/rails.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rails']]]
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:tensorflow/tensorflow.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'tensorflow']]]
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:twbs/bootstrap.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'bootstrap']]]
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:freeCodeCamp/freeCodeCamp.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'freeCodeCamp']]]
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:facebook/react.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'react']]]
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:angular/angular.js.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'angular.js']]]
-
-  stage('MyParallel') {
-    [1,2].each {
-      def a = it;
-      myBuilds[a] = { print "${a}\n" }
-    }   
-  }    
+  for ( e in repoMap ) {
+    myBuilds[e.key] = this.performSync(e.key, e.value)
+  }
 }
 try{
   stage('RunParallel'){
@@ -21,4 +18,8 @@ try{
   }
 } catch (Exception e){
   throw e
+}
+
+def Closure performSync(String repoName, String repoURL){
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: '${repoURL}']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '${repoName}']]]
 }
