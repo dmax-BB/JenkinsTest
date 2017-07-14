@@ -21,7 +21,7 @@ try{
   parallel myBuilds
   }
 } catch (Exception e){
-  throw e
+  print "I failed"
 }
 
 def syncTest() {
