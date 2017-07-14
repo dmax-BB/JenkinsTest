@@ -28,5 +28,6 @@ try{
 }
 
 def performSync(String repoName, String repoURL){
+  print "repoName = ${repoName}, repoURL = ${repoURL}"
   checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${repoURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${repoName}"]]]
 }
