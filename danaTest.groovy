@@ -11,8 +11,12 @@ node {
     }
   }
 
-  stage('RunParallel') {
-    parallel myBuilds
+  try{
+    stage('RunParallel') {
+      parallel myBuilds
+    }
+  } catch (Exception e){
+    throw e
   }
 }
 def syncCode(inputString) {
