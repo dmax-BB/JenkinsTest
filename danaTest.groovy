@@ -10,11 +10,14 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node {
   stage('MyParallel') {
+    def counter=1
     for ( e in repoMap ) {
+      def stepName = "Sync number [${counter}]"
       targetDir=e.key
       targetURL=e.value
       print "key = ${targetDir}, value = ${targetURL}"
       myBuilds[stepName] = syncCode(targetDir,targetURL)
+      counter++
     }
 
     for (int i = 0; i < stringsToEcho.size(); i++) {
