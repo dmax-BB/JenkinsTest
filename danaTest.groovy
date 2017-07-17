@@ -32,6 +32,7 @@ node{
       print "Out try"
     } catch (Exception e){
       print "I failed"
+      print e
     }
     print "Out RunParallel"
   }
