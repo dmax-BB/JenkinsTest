@@ -40,7 +40,7 @@ def cloneCode(targetDir,targetURL) {
         node {
             print "$targetDir\n"
             echo $targetURL
-            ##checkout scm: [$class: 'GitSCM', branches: [[name: "${env.RESTBACKEND_COMMITHASH}"]], userRemoteConfigs: [[credentialsId: "$env.SERV_BUILDER_GIT_CREDENTIALS", url: 'ssh://git@bitbucket.dc1.lan:7999/hub/rest-backend.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rest-backend']]]
+            //checkout scm: [$class: 'GitSCM', branches: [[name: "${env.RESTBACKEND_COMMITHASH}"]], userRemoteConfigs: [[credentialsId: "$env.SERV_BUILDER_GIT_CREDENTIALS", url: 'ssh://git@bitbucket.dc1.lan:7999/hub/rest-backend.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rest-backend']]]
         }
     }
 }
