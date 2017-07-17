@@ -24,7 +24,7 @@ try{
   throw e
 }
 
-def Closure getTest(String testFileName){
+def getTest(String testFileName){
         def doStuffClosure = {
 		print "${testFileName}\n"
 	}
