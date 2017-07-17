@@ -13,18 +13,25 @@ node {
   stage('MyParallel') {
     def counter=1
 
-    for (int i = 0; i < repoNames.size(); i++) {
-      def targetDir=repoNames.get(i)
-      def targetURL=repoMap.get(targetDir)
+    def keys = repoMap.KeySet() as List
+    for (key in keys) {
+      def value = repoMap.get(key)
+      def stepName = "[${key}]"
+      myBuilds[stepName] = syncCode(key,value)
+    )
 
-      def stepName = "[${targetDir}]"
-      print "key = ${targetDir}, value = ${targetURL}"
-      myBuilds[stepName] = syncCode(targetDir,targetURL)
-    }
+    //for (int i = 0; i < repoNames.size(); i++) {
+      //def targetDir=repoNames.get(i)
+      //def targetURL=repoMap.get(targetDir)
 
-    for (int i = 0; i < stringsToEcho.size(); i++) {
-      def s = stringsToEcho.get(i)
-      def stepName = "Sync number [${i}]"
+      //def stepName = "[${targetDir}]"
+      //print "key = ${targetDir}, value = ${targetURL}"
+      //myBuilds[stepName] = syncCode(targetDir,targetURL)
+    //}
+
+    //for (int i = 0; i < stringsToEcho.size(); i++) {
+      //def s = stringsToEcho.get(i)
+      //def stepName = "Sync number [${i}]"
       //myBuilds[stepName] = syncCode(s,s)
     }
   }
