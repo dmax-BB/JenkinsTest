@@ -1,50 +1,41 @@
-def stringsToEcho = ["a", "b", "c", "d"]
-def myBuilds = [:]
-def repoMap = [:]
-repoMap.put('rails','git@github.com:rails/rails.git')
-repoMap.put('tensorflow','git@github.com:tensorflow/tensorflow.git')
-repoMap.put('bootstrap','git@github.com:twbs/bootstrap.git')
-repoMap.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.git')
-repoMap.put('react','git@github.com:facebook/react.git')
-repoMap.put('angular.js','git@github.com:angular/angular.js.git')
-def repoNames = ["rails", "tensorflow", "bootstrap", "bootstrap", "freeCodeCamp", "react", "angular.js"]
+// Map to be used to pass to parallel task
+def reposToClone = [:]
+
+// Map which defines each of the repos we want to clone
+def repositoryMapping = [:]
+repositoryMapping.put('rails','git@github.com:rails/rails.git')
+repositoryMapping.put('tensorflow','git@github.com:tensorflow/tensorflow.git')
+repositoryMapping.put('bootstrap','git@github.com:twbs/bootstrap.git')
+repositoryMapping.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.git')
+repositoryMapping.put('react','git@github.com:facebook/react.git')
+repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 
 node {
-  stage('MyParallel') {
-    def counter=1
+  // 1st stage to set up the clone step
+  stage('clonePreparation') {
 
-    def keys = repoMap.keySet() as List
-    for (key in keys) {
-      def value = repoMap.get(key)
-      def stepName = "[${key}]"
-      myBuilds[stepName] = syncCode(key,value)
+    // Iterate acrosss the map, adding the step to the map
+    def repoMapKeys = repositoryMapping.keySet() as List
+    for (repoName in repoMapKeys) {
+      def value = repositoryMapping.get(repoName)
+      def stepName = "[Cloning for: ${repoName}]"
+      reposToClone[stepName] = cloneCode(repoName,value)
     }
 
-    //for (int i = 0; i < repoNames.size(); i++) {
-      //def targetDir=repoNames.get(i)
-      //def targetURL=repoMap.get(targetDir)
-
-      //def stepName = "[${targetDir}]"
-      //print "key = ${targetDir}, value = ${targetURL}"
-      //myBuilds[stepName] = syncCode(targetDir,targetURL)
-    //}
-
-    //for (int i = 0; i < stringsToEcho.size(); i++) {
-      //def s = stringsToEcho.get(i)
-      //def stepName = "Sync number [${i}]"
-      //myBuilds[stepName] = syncCode(s,s)
-    //}
   }
 
   try{
-    stage('RunParallel') {
-      parallel myBuilds
+    stage('RunCloning') {
+      // Execute the cloning in parallel
+      parallel reposToClone
     }
   } catch (Exception e){
     throw e
   }
 }
-def syncCode(targetDir,targetURL) {
+
+// Method to run the actual clone of the repository
+def cloneCode(targetDir,targetURL) {
     return {
         node {
             echo targetDir
