@@ -28,6 +28,7 @@ node{
     print "In RunParallel"
     try{
       print "In try"
+      myBuilds.failFast = true
       parallel myBuilds
       print "Out try"
     } catch (Exception e){
