@@ -1,5 +1,9 @@
 def myBuilds = [:]
 
+def getTest(String testFileName){
+  print "${testFileName}\n"
+}
+
 node{
   //checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest1']]]
   //checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest2']]]
@@ -27,8 +31,4 @@ try{
   }
 } catch (Exception e){
   print "I failed"
-}
-
-def getTest(String testFileName){
-  print "${testFileName}\n"
 }
