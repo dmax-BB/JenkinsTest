@@ -7,14 +7,15 @@ repoMap.put('bootstrap','git@github.com:twbs/bootstrap.git')
 repoMap.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.git')
 repoMap.put('react','git@github.com:facebook/react.git')
 repoMap.put('angular.js','git@github.com:angular/angular.js.git')
+def repoNames = ["rails", "tensorflow", "bootstrap", "bootstrap", "freeCodeCamp", "react", "angular.js"]
 
 node {
   stage('MyParallel') {
     def counter=1
 
-    for (int i = 0; i < stringsToEcho.size(); i++) {
-      targetDir=repoMap[i].key
-      targetURL=repoMap[i].value
+    for (int i = 0; i < repoNames.size(); i++) {
+      def targetDir=repoMap.get[i]
+      def targetURL=targetDir.get[targetDir]
 
       def stepName = "[${targetDir}]"
       print "key = ${targetDir}, value = ${targetURL}"
