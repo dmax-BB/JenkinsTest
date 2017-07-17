@@ -19,13 +19,18 @@ node{
       print "${a}  ${b}\n"
       myBuilds[a] = { print "${a}  ${b}\n" }
     }
+    print "Out of FOR"
   }
+  print "Out of MyParallel"
 }
 try{
+  print "In Try"
   stage('RunParallel'){
+  print "In RunParallel"
   myBuilds.failFast = true
   //parallel myBuilds
   }
+  print "Out of Try"
 } catch (Exception e){
   print "I failed"
 }
