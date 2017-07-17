@@ -30,7 +30,5 @@ try{
 }
 
 def getTest(String testFileName){
-        def doStuffClosure = {
-		print "${testFileName}\n"
-	}
+  print "${testFileName}\n"
 }
