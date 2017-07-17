@@ -1,7 +1,11 @@
 def myBuilds = [:]
 
-def Closure getTest(String testFileName){
-  print "${testFileName}\n"
+def getTest(testFileName){
+  return {
+    node {
+      echo testFileName
+    }
+  }
 }
 
 node{
@@ -11,8 +15,9 @@ node{
     print "In MyParallel"
     [1,2].each {
       def a = it;
+      def stepName = "echoing ${a}"
       //myBuilds[a] = { print "${a}\n" }
-      myBuilds[a] = { print "${a}\n" }
+      myBuilds[stepName] = a
     }
     print "Out MyParallel"
   }
