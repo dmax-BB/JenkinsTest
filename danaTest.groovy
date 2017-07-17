@@ -10,6 +10,10 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node {
   stage('MyParallel') {
+    for ( e in map ) {
+      print "key = ${e.key}, value = ${e.value}"
+    }
+
     for (int i = 0; i < stringsToEcho.size(); i++) {
       def s = stringsToEcho.get(i)
       def stepName = "Sync number [${i}]"
