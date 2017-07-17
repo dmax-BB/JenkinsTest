@@ -17,7 +17,7 @@ node {
     for (int i = 0; i < stringsToEcho.size(); i++) {
       def s = stringsToEcho.get(i)
       def stepName = "Sync number [${i}]"
-      myBuilds[stepName] = syncCode(s)
+      myBuilds[stepName] = syncCode(s,s)
     }
   }
 
@@ -29,10 +29,10 @@ node {
     throw e
   }
 }
-def syncCode(inputString) {
+def syncCode(targetDir,targetUrl) {
     return {
         node {
-            echo inputString
+            echo targetDir
         }
     }
 }
