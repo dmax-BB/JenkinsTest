@@ -3,7 +3,7 @@ def myBuilds = [:]
 def Closure getTest(testFileName){
   return {
     node {
-      echo testFileName
+      print testFileName
     }
   }
 }
