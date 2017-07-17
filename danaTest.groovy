@@ -11,7 +11,9 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 node {
   stage('MyParallel') {
     for ( e in repoMap ) {
-      print "key = ${e.key}, value = ${e.value}"
+      targetDir=e.key
+      targetURL=e.value
+      print "key = ${targetDir}, value = ${targetURL}"
     }
 
     for (int i = 0; i < stringsToEcho.size(); i++) {
@@ -29,10 +31,10 @@ node {
     throw e
   }
 }
-def syncCode(targetDir,targetUrl) {
+def syncCode(targetDir,targetURL) {
     return {
         node {
-            echo targetDir
+            echo targetDir targetURL
         }
     }
 }
