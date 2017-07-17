@@ -23,6 +23,8 @@ node{
     print "In RunParallel"
     try{
       print "In try"
+      parallel myBuilds
+      print "Out try"
     } catch (Exception e){
       print "I failed"
     }
