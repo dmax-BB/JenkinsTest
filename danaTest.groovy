@@ -13,7 +13,7 @@ node {
   stage('MyParallel') {
     def counter=1
 
-    def keys = repoMap.KeySet() as List
+    def keys = repoMap.keySet() as List
     for (key in keys) {
       def value = repoMap.get(key)
       def stepName = "[${key}]"
