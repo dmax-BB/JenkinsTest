@@ -13,7 +13,7 @@ node{
     [1,2].each {
       def a = it;
       //myBuilds[a] = { print "${a}\n" }
-      myBuilds[a] = this.getTest(a)
+      myBuilds[a] = { getTest(a) }
     }
    print "Out MyParallel"
   }
