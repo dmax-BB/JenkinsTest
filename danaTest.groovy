@@ -34,7 +34,8 @@ node {
 def syncCode(targetDir,targetURL) {
     return {
         node {
-            echo targetDir targetURL
+            echo targetDir
+            echo targetURL
         }
     }
 }
