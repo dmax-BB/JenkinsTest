@@ -15,7 +15,7 @@ node {
 
     for (int i = 0; i < repoNames.size(); i++) {
       def targetDir=repoNames.get(i)
-      def targetURL=targetDir.get(targetDir)
+      def targetURL=repoMap.get(targetDir)
 
       def stepName = "[${targetDir}]"
       print "key = ${targetDir}, value = ${targetURL}"
