@@ -1,6 +1,6 @@
 def myBuilds = [:]
 
-def getTest(String testFileName){
+def Closure getTest(String testFileName){
   print "${testFileName}\n"
 }
 
