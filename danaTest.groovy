@@ -1,44 +1,24 @@
-// This is what I am trying to get working
 def myBuilds = [:]
-def repoMap = [:]
-repoMap.put('rails','git@github.com:rails/rails.git')
-repoMap.put('tensorflow','git@github.com:tensorflow/tensorflow.git')
-repoMap.put('bootstrap','git@github.com:twbs/bootstrap.git')
-repoMap.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.git')
-repoMap.put('react','git@github.com:facebook/react.git')
-repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node{
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest1']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest2']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest3']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest4']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest5']]]
+  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:dmax-BB/JenkinsTest.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'JenkinsTest6']]]
 
   stage('MyParallel') {
-    //for ( e in repoMap ) {
-    for (int i =0; i < repoMap.size(); i++){
-      //myBuilds[e.key] = this.syncTest()
-      //print "$e.key $e.value"
-      def a = repoMap[i].key
-      def b = repoMap[i].value
-      print "${a}  ${b}\n"
-      myBuilds[a] = { print "${a}  ${b}\n" }
-    }
-    print "Out of FOR"
-  }
-  print "Out of MyParallel"
+    [1,2].each {
+      def a = it;
+      myBuilds[a] = { print "${a}\n" }
+    }   
+  }    
 }
 try{
-  print "In Try"
   stage('RunParallel'){
-  print "In RunParallel"
-  myBuilds.failFast = true
-  //parallel myBuilds
+  parallel myBuilds
   }
-  print "Out of Try"
 } catch (Exception e){
-  print "I failed"
-}
-
-def syncTest() {
-  print "Starting syncTest"
-  sleep 30
-  checkout scm: [$class: 'GitSCM', branches: [[name: "origin/master"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: 'git@github.com:rails/rails.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'rails']]]
-  print "syncTest complete"
+  throw e
 }
