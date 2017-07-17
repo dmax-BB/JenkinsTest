@@ -10,7 +10,7 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 
 node {
   stage('MyParallel') {
-    for ( e in map ) {
+    for ( e in repoMap ) {
       print "key = ${e.key}, value = ${e.value}"
     }
 
