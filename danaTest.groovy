@@ -33,7 +33,7 @@ node {
       //def s = stringsToEcho.get(i)
       //def stepName = "Sync number [${i}]"
       //myBuilds[stepName] = syncCode(s,s)
-    }
+    //}
   }
 
   try{
