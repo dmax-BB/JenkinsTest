@@ -1,6 +1,6 @@
 def myBuilds = [:]
 
-def getTest(testFileName){
+def Closure getTest(testFileName){
   return {
     node {
       echo testFileName
