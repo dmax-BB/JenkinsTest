@@ -14,12 +14,13 @@ node {
       targetDir=e.key
       targetURL=e.value
       print "key = ${targetDir}, value = ${targetURL}"
+      myBuilds[stepName] = syncCode(targetDir,targetURL)
     }
 
     for (int i = 0; i < stringsToEcho.size(); i++) {
       def s = stringsToEcho.get(i)
       def stepName = "Sync number [${i}]"
-      myBuilds[stepName] = syncCode(s,s)
+      //myBuilds[stepName] = syncCode(s,s)
     }
   }
 
