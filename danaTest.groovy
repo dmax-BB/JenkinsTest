@@ -18,7 +18,7 @@ node {
       def value = repoMap.get(key)
       def stepName = "[${key}]"
       myBuilds[stepName] = syncCode(key,value)
-    )
+    }
 
     //for (int i = 0; i < repoNames.size(); i++) {
       //def targetDir=repoNames.get(i)
