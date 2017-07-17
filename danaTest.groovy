@@ -10,12 +10,12 @@ repoMap.put('angular.js','git@github.com:angular/angular.js.git')
 node{
 
   stage('MyParallel') {
-    for ( e in repoMap ) {
+    //for ( e in repoMap ) {
+    for (int i =0; i < repoMap.size(); i++){
       //myBuilds[e.key] = this.syncTest()
-      print "$e.key $e.value"
-      def a = e.key
-      def b = e.value
-      print "$a $b"
+      //print "$e.key $e.value"
+      def a = repoMap[i].key
+      def b = repoMap[i].value
       print "${a}  ${b}\n"
       myBuilds[a] = { print "${a}  ${b}\n" }
     }
