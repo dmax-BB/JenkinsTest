@@ -1,18 +1,21 @@
 def stringsToEcho = ["a", "b", "c", "d"]
 
-def stepsForParallel = [:]
+def myBuilds = [:]
 
-for (int i = 0; i < stringsToEcho.size(); i++) {
-    def s = stringsToEcho.get(i)
+node {
+  stage('MyParallel') {
+    for (int i = 0; i < stringsToEcho.size(); i++) {
+      def s = stringsToEcho.get(i)
+      def stepName = "echoing ${s}"
+      myBuilds[stepName] = syncCode(s)
+    }
+  }
 
-    def stepName = "echoing ${s}"
-    
-    stepsForParallel[stepName] = transformIntoStep(s)
+  stage('RunParallel') {
+    parallel myBuilds
+  }
 }
-
-parallel stepsForParallel
-
-def transformIntoStep(inputString) {
+def syncCode(inputString) {
     return {
         node {
             echo inputString
