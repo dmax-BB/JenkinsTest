@@ -13,23 +13,13 @@ repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 node {
   // 1st stage to set up the clone step
   stage('clonePreparation') {
-
-    // Iterate acrosss the map, adding the step to the map
-    //def repoMapKeys = repositoryMapping.keySet() as List
-    //for (repoName in repoMapKeys) {
-      //def repoUrl = repositoryMapping.get(repoName)
-      //def stepName = "[Cloning for: ${repoName}]"
-      //reposToClone[stepName] = cloneCode(repoName,repoUrl)
-    //}
-
-    testUsingMap(repositoryMapping,reposToClone)
+    processReposToClone(repositoryMapping,reposToClone)
   }
 
   try{
     stage('RunCloning') {
       // Execute the cloning in parallel
       parallel reposToClone
-      //testUsingMap(repositoryMapping)
     }
   } catch (Exception e){
     throw e
@@ -47,7 +37,7 @@ def cloneCode(targetDir,targetURL) {
 }
 
 // Test method for future dev
-def testUsingMap(Map userDataMap, Map userCloneMap) {
+def processReposToClone(Map userDataMap, Map userCloneMap) {
     def repoMapKeys = userDataMap.keySet() as List
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
