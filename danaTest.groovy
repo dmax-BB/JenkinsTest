@@ -17,9 +17,9 @@ node {
     // Iterate acrosss the map, adding the step to the map
     def repoMapKeys = repositoryMapping.keySet() as List
     for (repoName in repoMapKeys) {
-      def value = repositoryMapping.get(repoName)
+      def repoUrl = repositoryMapping.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      reposToClone[stepName] = cloneCode(repoName,value)
+      reposToClone[stepName] = cloneCode(repoName,repoUrl)
     }
 
   }
@@ -28,6 +28,7 @@ node {
     stage('RunCloning') {
       // Execute the cloning in parallel
       parallel reposToClone
+      testUsingMap(repositoryMapping)
     }
   } catch (Exception e){
     throw e
@@ -42,4 +43,13 @@ def cloneCode(targetDir,targetURL) {
             checkout scm: [$class: 'GitSCM', branches: [[name: 'origin/master']], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]]
         }
     }
+}
+
+// Test method for future dev
+def testUsingMap(Map userMap) {
+  def mapKeys = userMap.keySet() as List
+  for (key in repoMapKeys) {
+    def value = userMap.get(key)
+    print "KEY: ${key} VALUE: ${value}"
+  }
 }
