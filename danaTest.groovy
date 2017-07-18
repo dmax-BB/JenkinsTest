@@ -22,7 +22,7 @@ node {
       //reposToClone[stepName] = cloneCode(repoName,repoUrl)
     //}
 
-    testUsingMap(repositoryMapping)
+    testUsingMap(repositoryMapping,reposToClone)
   }
 
   try{
@@ -47,12 +47,12 @@ def cloneCode(targetDir,targetURL) {
 }
 
 // Test method for future dev
-def testUsingMap(Map userDataMap) {
+def testUsingMap(Map userDataMap, Map userCloneMap) {
     def repoMapKeys = userDataMap.keySet() as List
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      reposToClone[stepName] = cloneCode(repoName,repoUrl)
+      userCloneMap[stepName] = cloneCode(repoName,repoUrl)
       print "Adding to map: ${repoName} ${repoUrl}"
     }
 }
