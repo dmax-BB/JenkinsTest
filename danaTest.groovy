@@ -48,7 +48,7 @@ def cloneCode(targetDir,targetURL) {
 // Test method for future dev
 def testUsingMap(Map userMap) {
   def mapKeys = userMap.keySet() as List
-  for (key in repoMapKeys) {
+  for (key in mapKeys) {
     def value = userMap.get(key)
     print "KEY: ${key} VALUE: ${value}"
   }
