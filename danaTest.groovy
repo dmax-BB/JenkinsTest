@@ -15,20 +15,21 @@ node {
   stage('clonePreparation') {
 
     // Iterate acrosss the map, adding the step to the map
-    def repoMapKeys = repositoryMapping.keySet() as List
-    for (repoName in repoMapKeys) {
-      def repoUrl = repositoryMapping.get(repoName)
-      def stepName = "[Cloning for: ${repoName}]"
-      reposToClone[stepName] = cloneCode(repoName,repoUrl)
-    }
+    //def repoMapKeys = repositoryMapping.keySet() as List
+    //for (repoName in repoMapKeys) {
+      //def repoUrl = repositoryMapping.get(repoName)
+      //def stepName = "[Cloning for: ${repoName}]"
+      //reposToClone[stepName] = cloneCode(repoName,repoUrl)
+    //}
 
+    testUsingMap(repositoryMapping)
   }
 
   try{
     stage('RunCloning') {
       // Execute the cloning in parallel
       parallel reposToClone
-      testUsingMap(repositoryMapping)
+      //testUsingMap(repositoryMapping)
     }
   } catch (Exception e){
     throw e
@@ -47,9 +48,11 @@ def cloneCode(targetDir,targetURL) {
 
 // Test method for future dev
 def testUsingMap(Map userMap) {
-  def mapKeys = userMap.keySet() as List
-  for (key in mapKeys) {
-    def value = userMap.get(key)
-    print "KEY: ${key} VALUE: ${value}"
-  }
+    def repoMapKeys = repositoryMapping.keySet() as List
+    for (repoName in repoMapKeys) {
+      def repoUrl = repositoryMapping.get(repoName)
+      def stepName = "[Cloning for: ${repoName}]"
+      reposToClone[stepName] = cloneCode(repoName,repoUrl)
+      print "Adding to map: ${repoName} ${repoUrl}"
+    }
 }
