@@ -48,7 +48,7 @@ def cloneCode(targetDir,targetURL) {
 
 def cloneCode2(Map cloneDetails) {
     sh "echo START: `date`"
-    checkout scm: [$class: cloneDetails.scmClass, branches: [[name: 'origin/master']], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]]
+    checkout scm: [$class: cloneDetails.scmClass, branches: [[name: cloneDetails.branch]], userRemoteConfigs: [[credentialsId: cloneDetails.credentials, url: cloneDetails.url]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: cloneDetails.tarDir]]]
     sh "echo END: `date`"
 }
 
