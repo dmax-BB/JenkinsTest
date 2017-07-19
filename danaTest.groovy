@@ -1,17 +1,22 @@
-defaultBranch='origin/master'
+defaultBranch='master'
 if (!env.RAILS_BRANCH){env.RAILS_BRANCH=defaultBranch}
+if (!env.TENSORFLOW_BRANCH){env.TENSORFLOW_BRANCH=defaultBranch}
+if (!env.BOOTSTRAP_BRANCH){env.BOOTSTRAP_BRANCH=defaultBranch}
+if (!env.FREECODECAMP_BRANCH){env.FREECODECAMP_BRANCH=defaultBranch}
+if (!env.REACT_BRANCH){env.REACT_BRANCH=defaultBranch}
+if (!env.ANGULARJS_BRANCH){env.ANGULARJS_BRANCH=defaultBranch}
 
 node {
   // Run cloning
   try{
     stage('CloneRepos') {
       parallel (
-        clone1: cloneCode("${env.RAILS_BRANCH}",'git@github.com:rails/rails.git','rails'),
-        clone2: cloneCode('origin/master','git@github.com:tensorflow/tensorflow.git','tensorflow'),
-        clone3: cloneCode('origin/master','git@github.com:twbs/bootstrap.git','bootstrap'),
-        clone4: cloneCode('origin/master','git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
-        clone5: cloneCode('origin/master','git@github.com:facebook/react.git','react'),
-        clone6: cloneCode('origin/master','git@github.com:angular/angular.js.git','angular.js')
+        clone1: cloneMyRepo('origin/'"${env.RAILS_BRANCH}",'git@github.com:rails/rails.git','rails'),
+        clone2: cloneMyRepo('origin/'"${env.TENSORFLOW_BRANCH}",'git@github.com:tensorflow/tensorflow.git','tensorflow'),
+        clone3: cloneMyRepo('origin/'"${env.BOOTSTRAP_BRANCH}",'git@github.com:twbs/bootstrap.git','bootstrap'),
+        clone4: cloneMyRepo('origin/'"${env.FREECODECAMP_BRANCH}",'git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
+        clone5: cloneMyRepo('origin/'"${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
+        clone6: cloneMyRepo('origin/'"${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js')
       )
     }
   } catch (Exception e){
@@ -21,11 +26,12 @@ node {
 }
 
 // Method to run the actual clone of the repository
-def cloneCode(branchName,targetUrl,targetDir) {
+def cloneMyRepo(branchName,targetUrl,targetDir) {
   return {
     node {
       print "$targetDir $targetUrl"
       sh "echo START: `date`"
+      sh "echo Using branch: ${branchName}"
       checkout scm: [
                     $class: 'GitSCM',
                     branches: [[name: "$branchName"]],
