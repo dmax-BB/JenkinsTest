@@ -80,6 +80,7 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
 }
 
 def processReposToClone2(Map userDataMap, Map userCloneMap) {
+  print userDataMap.toString()
   def repoMapKeys = userDataMap.keySet() as List
   for (repoName in repoMapKeys) {
     def stepName = "[Cloning for: ${repoName}]"
