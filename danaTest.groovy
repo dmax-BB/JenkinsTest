@@ -88,4 +88,5 @@ def processReposToClone2(Map userDataMap, Map userCloneMap) {
     userCloneMap[stepName] = cloneCode2(userDataMap.get(repoName))
     print "Added to map: ${repoName}"
   }
+  print userDataMap.toString()
 }
