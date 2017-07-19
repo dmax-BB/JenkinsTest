@@ -11,7 +11,7 @@ repositoryMapping.put('react','git@github.com:facebook/react.git')
 repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 
 def cloneDetails = [:]
-cloneDetails.put('scmClass','GitSCM')
+cloneDetails.scmClass='GitSCM'
 cloneDetails.put('branch','origin/master')
 cloneDetails.put('credentials',"$env.DANA_TEST_CREDENTIALS")
 cloneDetails.put('url','git@github.com:rails/rails.git')
