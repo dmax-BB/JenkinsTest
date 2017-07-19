@@ -12,10 +12,10 @@ repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 
 def cloneDetails = [:]
 cloneDetails.scmClass='GitSCM'
-cloneDetails.put('branch','origin/master')
-cloneDetails.put('credentials',"$env.DANA_TEST_CREDENTIALS")
-cloneDetails.put('url','git@github.com:rails/rails.git')
-cloneDetails.put('tarDir','rails')
+cloneDetails.branch='origin/master'
+cloneDetails.credentials="$env.DANA_TEST_CREDENTIALS"
+cloneDetails.url='git@github.com:rails/rails.git'
+cloneDetails.tarDir='rails'
 
 node {
   // 1st stage to set up the clone step
