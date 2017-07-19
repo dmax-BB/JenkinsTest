@@ -27,7 +27,7 @@ repositoryMapping.react.url='git@github.com:facebook/react.git'
 
 repositoryMapping.angularjs=cloneDetails
 repositoryMapping.angularjs.url='git@github.com:angular/angular.js.git'
-//repositoryMapping.angularjs.tarDir='angular.js'
+repositoryMapping.angularjs.tarDir='angular.js'
 
 node {
   // 1st stage to set up the clone step
@@ -38,7 +38,8 @@ node {
   try{
     stage('RunCloning') {
       // Execute the cloning in parallel
-      parallel reposToClone
+      //parallel reposToClone
+    print "Hello"
     }
   } catch (Exception e){
     throw e
@@ -84,7 +85,7 @@ def processReposToClone2(Map userDataMap, Map userCloneMap) {
     def stepName = "[Cloning for: ${repoName}]"
     print "$stepName"
     //if (userDataMap.stepName.tarDir){
-      userDataMap.stepName.tarDir=userDataMap.stepName
+      //userDataMap.stepName.tarDir=userDataMap.stepName
     //}
     userCloneMap[stepName] = cloneCode2(userDataMap.get(repoName))
     print "Added to map: ${repoName}"
