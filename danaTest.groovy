@@ -2,46 +2,24 @@
 def reposToClone = [:]
 
 // Map which defines each of the repos we want to clone
-def cloneDetails = [:]
-cloneDetails.scmClass='GitSCM'
-cloneDetails.branch='origin/master'
-cloneDetails.credentials="$env.DANA_TEST_CREDENTIALS"
-cloneDetails.url=''
-cloneDetails.tarDir='BLAH'
-
 def repositoryMapping = [:]
-repositoryMapping.rails=cloneDetails
-repositoryMapping.rails.url='git@github.com:rails/rails.git'
-
-repositoryMapping.tensorflow=cloneDetails
-repositoryMapping.tensorflow.url='git@github.com:tensorflow/tensorflow.git'
-
-repositoryMapping.bootstrap=cloneDetails
-repositoryMapping.bootstrap.url='git@github.com:twbs/bootstrap.git'
-
-repositoryMapping.freeCodeCamp=cloneDetails
-repositoryMapping.freeCodeCamp.url='git@github.com:freeCodeCamp/freeCodeCamp.git'
-
-repositoryMapping.react=cloneDetails
-repositoryMapping.react.url='git@github.com:facebook/react.git'
-
-print repositoryMapping.toString()
-repositoryMapping.angularjs=cloneDetails
-repositoryMapping.angularjs.url='git@github.com:angular/angular.js.git'
-repositoryMapping.angularjs.tarDir='angular.js'
-print repositoryMapping.toString()
+repositoryMapping.rails='git@github.com:rails/rails.git'
+repositoryMapping.tensorflow='git@github.com:tensorflow/tensorflow.git'
+repositoryMapping.bootstrap='git@github.com:twbs/bootstrap.git'
+repositoryMapping.freeCodeCamp='git@github.com:freeCodeCamp/freeCodeCamp.git'
+repositoryMapping.react='git@github.com:facebook/react.git'
+repositoryMapping.angular.js='git@github.com:angular/angular.js.git'
 
 node {
   // 1st stage to set up the clone step
   stage('clonePreparation') {
-    processReposToClone2(repositoryMapping,reposToClone)
+    processReposToClone(repositoryMapping,reposToClone)
   }
 
   try{
     stage('RunCloning') {
       // Execute the cloning in parallel
-      //parallel reposToClone
-    print "Hello"
+      parallel reposToClone
     }
   } catch (Exception e){
     throw e
@@ -60,16 +38,6 @@ def cloneCode(targetDir,targetURL) {
     }
 }
 
-def cloneCode2(Map cloneDetails) {
-  return {
-    node {
-      sh "echo START: `date`"
-      checkout scm: [$class: cloneDetails.scmClass, branches: [[name: cloneDetails.branch]], userRemoteConfigs: [[credentialsId: cloneDetails.credentials, url: cloneDetails.url]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: cloneDetails.tarDir]]]
-      sh "echo END: `date`"
-    }
-  }
-}
-
 // Test method for future dev
 def processReposToClone(Map userDataMap, Map userCloneMap) {
     def repoMapKeys = userDataMap.keySet() as List
@@ -79,16 +47,4 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
       userCloneMap[stepName] = cloneCode(repoName,repoUrl)
       print "Adding to map: ${repoName} ${repoUrl}"
     }
-}
-
-def processReposToClone2(Map userDataMap, Map userCloneMap) {
-  def repoMapKeys = userDataMap.keySet() as List
-  for (repoName in repoMapKeys) {
-    print userDataMap.get(repoName).toString()
-    def stepName = "[Cloning for: ${repoName}]"
-    print "$stepName"
-    userCloneMap[stepName] = cloneCode2(userDataMap.get(repoName))
-    print "Added to map: ${repoName}"
-  }
-  print userDataMap.toString()
 }
