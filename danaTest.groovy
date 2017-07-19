@@ -11,12 +11,12 @@ node {
   try{
     stage('CloneRepos') {
       parallel (
-        clone1: cloneMyRepo('origin/'"${env.RAILS_BRANCH}",'git@github.com:rails/rails.git','rails'),
-        clone2: cloneMyRepo('origin/'"${env.TENSORFLOW_BRANCH}",'git@github.com:tensorflow/tensorflow.git','tensorflow'),
-        clone3: cloneMyRepo('origin/'"${env.BOOTSTRAP_BRANCH}",'git@github.com:twbs/bootstrap.git','bootstrap'),
-        clone4: cloneMyRepo('origin/'"${env.FREECODECAMP_BRANCH}",'git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
-        clone5: cloneMyRepo('origin/'"${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
-        clone6: cloneMyRepo('origin/'"${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js')
+        clone1: cloneMyRepo("origin/${env.RAILS_BRANCH}",'git@github.com:rails/rails.git','rails'),
+        clone2: cloneMyRepo("origin/${env.TENSORFLOW_BRANCH}",'git@github.com:tensorflow/tensorflow.git','tensorflow'),
+        clone3: cloneMyRepo("origin/${env.BOOTSTRAP_BRANCH}",'git@github.com:twbs/bootstrap.git','bootstrap'),
+        clone4: cloneMyRepo("origin/${env.FREECODECAMP_BRANCH}",'git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
+        clone5: cloneMyRepo("origin/${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
+        clone6: cloneMyRepo("origin/${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js')
       )
     }
   } catch (Exception e){
