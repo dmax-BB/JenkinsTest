@@ -30,12 +30,12 @@ node {
 def cloneCode(branchName,targetUrl,targetDir) {
     return {
         node {
-            print "$targetDir $targetURL"
+            print "$targetDir $targetUrl"
             sh "echo START: `date`"
             checkout scm: [
                           $class: 'GitSCM',
                           branches: [[name: "$branchName"]],
-                          userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]],
+                          userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetUrl}"]],
                           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]
                           ]
             sh "echo END: `date`"
