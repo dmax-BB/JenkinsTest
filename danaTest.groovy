@@ -7,7 +7,7 @@ cloneDetails.scmClass='GitSCM'
 cloneDetails.branch='origin/master'
 cloneDetails.credentials="$env.DANA_TEST_CREDENTIALS"
 cloneDetails.url=''
-cloneDetails.tarDir=''
+cloneDetails.tarDir='BLAH'
 
 def repositoryMapping = [:]
 repositoryMapping.rails=cloneDetails
