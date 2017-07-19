@@ -10,6 +10,13 @@ repositoryMapping.put('freeCodeCamp','git@github.com:freeCodeCamp/freeCodeCamp.g
 repositoryMapping.put('react','git@github.com:facebook/react.git')
 repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 
+def cloneDetails = [:]
+cloneDetails.put('scmClass,'GitSCM')
+cloneDetails.put('branch','origin/master')
+cloneDetails.put('credentials','$env.DANA_TEST_CREDENTIALS')
+cloneDetails.put('url','git@github.com:rails/rails.git')
+cloneDetails.put('tarDir','rails')
+
 node {
   // 1st stage to set up the clone step
   stage('clonePreparation') {
@@ -20,6 +27,7 @@ node {
     stage('RunCloning') {
       // Execute the cloning in parallel
       parallel reposToClone
+      cloneCode2(cloneDetails)
     }
   } catch (Exception e){
     throw e
@@ -36,6 +44,12 @@ def cloneCode(targetDir,targetURL) {
             sh "echo END: `date`"
         }
     }
+}
+
+def cloneCode2(Map cloneDetails) {
+    sh "echo START: `date`"
+    checkout scm: [$class: cloneDetails.get(scmClass), branches: [[name: 'origin/master']], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]]
+    sh "echo END: `date`"
 }
 
 // Test method for future dev
