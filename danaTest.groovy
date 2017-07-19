@@ -54,7 +54,7 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName,$env.WORKSPACE)
+      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName,"$env.WORKSPACE")
       print "Adding to map: ${repoName} ${repoUrl}"
     }
 }
