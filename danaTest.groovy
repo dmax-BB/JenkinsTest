@@ -31,6 +31,7 @@ def cloneCode(branchName,targetUrl,targetDir) {
     return {
         node {
             print "$targetDir $targetUrl"
+            sh "pwd"
             sh "echo START: `date`"
             checkout scm: [
                           $class: 'GitSCM',
