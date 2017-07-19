@@ -25,9 +25,11 @@ repositoryMapping.freeCodeCamp.url='git@github.com:freeCodeCamp/freeCodeCamp.git
 repositoryMapping.react=cloneDetails
 repositoryMapping.react.url='git@github.com:facebook/react.git'
 
+print repositoryMapping.toString()
 repositoryMapping.angularjs=cloneDetails
 repositoryMapping.angularjs.url='git@github.com:angular/angular.js.git'
 repositoryMapping.angularjs.tarDir='angular.js'
+print repositoryMapping.toString()
 
 node {
   // 1st stage to set up the clone step
