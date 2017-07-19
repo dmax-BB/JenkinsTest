@@ -84,7 +84,7 @@ def processReposToClone2(Map userDataMap, Map userCloneMap) {
   for (repoName in repoMapKeys) {
     def stepName = "[Cloning for: ${repoName}]"
     print "$stepName"
-    print $userDataMap.$repoName.tarDir.toString()
+    print userDataMap.repoName.tarDir.toString()
     //if (userDataMap.$repoName.tarDir){
       //userDataMap.$repoName.tarDir=userDataMap.$repoName
     //}
