@@ -81,9 +81,9 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
 
 def processReposToClone2(Map userDataMap, Map userCloneMap) {
   print userDataMap.toString()
-  print userDataMap.rails.toString()
   def repoMapKeys = userDataMap.keySet() as List
   for (repoName in repoMapKeys) {
+    print userDataMap.${repoName}.toString()
     def stepName = "[Cloning for: ${repoName}]"
     print "$stepName"
     print userDataMap.repoName.toString()
