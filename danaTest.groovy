@@ -82,9 +82,9 @@ def processReposToClone2(Map userDataMap, Map userCloneMap) {
   def repoMapKeys = userDataMap.keySet() as List
   for (repoName in repoMapKeys) {
     def stepName = "[Cloning for: ${repoName}]"
-    if (userDataMap.stepName.tarDir){
+    //if (userDataMap.stepName.tarDir){
       userDataMap.stepName.tarDir=userDataMap.stepName
-    }
+    //}
     userCloneMap[stepName] = cloneCode2(userDataMap.get(repoName))
     print "Added to map: ${repoName}"
   }
