@@ -27,7 +27,7 @@ repositoryMapping.react.url='git@github.com:facebook/react.git'
 
 repositoryMapping.angularjs=cloneDetails
 repositoryMapping.angularjs.url='git@github.com:angular/angular.js.git'
-repositoryMapping.angularjs.tarDir='angular.js'
+//repositoryMapping.angularjs.tarDir='angular.js'
 
 node {
   // 1st stage to set up the clone step
