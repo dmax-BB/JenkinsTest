@@ -39,6 +39,7 @@ def cloneCode(branchName,targetUrl,targetDir) {
                           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]
                           ]
             sh "echo END: `date`"
+            sh "pwd"
         }
     }
 }
