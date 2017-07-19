@@ -12,14 +12,23 @@ repositoryMapping.put('angular.js','git@github.com:angular/angular.js.git')
 
 node {
   // 1st stage to set up the clone step
-  stage('clonePreparation') {
-    processReposToClone(repositoryMapping,reposToClone)
-  }
+  //stage('clonePreparation') {
+    //processReposToClone(repositoryMapping,reposToClone)
+  //}
+
+  parallel (
+    clone1: { cloneCode('origin/master','git@github.com:rails/rails.git','rails' },
+    clone2: { cloneCode('origin/master','git@github.com:tensorflow/tensorflow.git','tensorflow' },
+    clone3: { cloneCode('origin/master','git@github.com:twbs/bootstrap.git','bootstrap' },
+    clone4: { cloneCode('origin/master','git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp' },
+    clone5: { cloneCode('origin/master','git@github.com:facebook/react.git','react' },
+    clone6: { cloneCode('origin/master','git@github.com:angular/angular.js.git','angular.js' }
+  )
 
   try{
     stage('RunCloning') {
       // Execute the cloning in parallel
-      parallel reposToClone
+      //parallel reposToClone
       print "$env.WORKSPACE"
     }
   } catch (Exception e){
@@ -28,13 +37,10 @@ node {
 }
 
 // Method to run the actual clone of the repository
-def cloneCode(branchName,targetUrl,targetDir,runDir) {
+def cloneCode(branchName,targetUrl,targetDir) {
     return {
         node {
             print "$targetDir $targetUrl"
-            sh "pwd"
-            sh "if [[ ! -d \"${runDir}\" ]]; then mkdir \"${runDir}\"; fi ; cd \"${runDir}\""
-            sh "pwd"
             sh "echo START: `date`"
             checkout scm: [
                           $class: 'GitSCM',
@@ -43,7 +49,6 @@ def cloneCode(branchName,targetUrl,targetDir,runDir) {
                           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]
                           ]
             sh "echo END: `date`"
-            sh "pwd"
         }
     }
 }
@@ -54,7 +59,7 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName,"$env.WORKSPACE")
+      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName)
       print "Adding to map: ${repoName} ${repoUrl}"
     }
 }
