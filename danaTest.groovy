@@ -20,6 +20,7 @@ node {
     stage('RunCloning') {
       // Execute the cloning in parallel
       parallel reposToClone
+      print "$env.WORKSPACE"
     }
   } catch (Exception e){
     throw e
