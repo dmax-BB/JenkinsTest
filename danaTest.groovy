@@ -33,7 +33,7 @@ def cloneCode(branchName,targetUrl,targetDir,runDir) {
         node {
             print "$targetDir $targetUrl"
             sh "pwd"
-            sh "cd $runDir"
+            sh "if [[ ! -d \"${runDir}\" ]]; then mkdir \"${runDir}\"; fi ; cd \"${runDir}\""
             sh "pwd"
             sh "echo START: `date`"
             checkout scm: [
