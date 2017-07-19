@@ -17,7 +17,7 @@ node {
   //}
 
   parallel (
-    clone1: { cloneCode('origin/master','git@github.com:rails/rails.git','rails') },
+    clone1: cloneCode('origin/master','git@github.com:rails/rails.git','rails'),
     clone2: { cloneCode('origin/master','git@github.com:tensorflow/tensorflow.git','tensorflow') },
     clone3: { cloneCode('origin/master','git@github.com:twbs/bootstrap.git','bootstrap') },
     clone4: { cloneCode('origin/master','git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp') },
