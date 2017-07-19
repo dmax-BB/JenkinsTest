@@ -28,6 +28,7 @@ node {
       // Execute the cloning in parallel
       parallel reposToClone
       //cloneCode2(cloneDetails)
+      repositoryMapping.danaTest=cloneDetails
     }
   } catch (Exception e){
     throw e
