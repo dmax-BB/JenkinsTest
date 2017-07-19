@@ -30,6 +30,8 @@ node {
       //cloneCode2(cloneDetails)
       repositoryMapping.danaTest=cloneDetails
       echo "${repositoryMapping.toString()}"
+      repositoryMapping.danaTest.url='BLAHBLAHBLAH'
+      echo "${repositoryMapping.toString()}"
     }
   } catch (Exception e){
     throw e
