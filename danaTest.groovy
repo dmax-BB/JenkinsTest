@@ -27,12 +27,17 @@ node {
 }
 
 // Method to run the actual clone of the repository
-def cloneCode(branchName,targetDir,targetURL) {
+def cloneCode(branchName,targetUrl,targetDir) {
     return {
         node {
             print "$targetDir $targetURL"
             sh "echo START: `date`"
-            checkout scm: [$class: 'GitSCM', branches: [[name: "$branchName"]], userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]]
+            checkout scm: [
+                          $class: 'GitSCM',
+                          branches: [[name: "$branchName"]],
+                          userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetURL}"]],
+                          extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]
+                          ]
             sh "echo END: `date`"
         }
     }
@@ -44,7 +49,7 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      userCloneMap[stepName] = cloneCode('origin/master',repoName,repoUrl)
+      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName)
       print "Adding to map: ${repoName} ${repoUrl}"
     }
 }
