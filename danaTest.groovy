@@ -28,12 +28,12 @@ node {
 }
 
 // Method to run the actual clone of the repository
-def cloneCode(branchName,targetUrl,targetDir) {
+def cloneCode(branchName,targetUrl,targetDir,runDir) {
     return {
         node {
             print "$targetDir $targetUrl"
             sh "pwd"
-            sh "cd $env.WORKSPACE"
+            sh "cd $runDir"
             sh "pwd"
             sh "echo START: `date`"
             checkout scm: [
@@ -54,7 +54,7 @@ def processReposToClone(Map userDataMap, Map userCloneMap) {
     for (repoName in repoMapKeys) {
       def repoUrl = userDataMap.get(repoName)
       def stepName = "[Cloning for: ${repoName}]"
-      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName)
+      userCloneMap[stepName] = cloneCode('origin/master',repoUrl,repoName,$env.WORKSPACE)
       print "Adding to map: ${repoName} ${repoUrl}"
     }
 }
