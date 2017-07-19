@@ -29,6 +29,7 @@ node {
       parallel reposToClone
       //cloneCode2(cloneDetails)
       repositoryMapping.danaTest=cloneDetails
+      echo "${repositoryMapping.toString()}"
     }
   } catch (Exception e){
     throw e
