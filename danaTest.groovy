@@ -8,7 +8,7 @@ repositoryMapping.tensorflow='git@github.com:tensorflow/tensorflow.git'
 repositoryMapping.bootstrap='git@github.com:twbs/bootstrap.git'
 repositoryMapping.freeCodeCamp='git@github.com:freeCodeCamp/freeCodeCamp.git'
 repositoryMapping.react='git@github.com:facebook/react.git'
-repositoryMapping.angular.js='git@github.com:angular/angular.js.git'
+repositoryMapping.put=('angular.js','git@github.com:angular/angular.js.git')
 
 node {
   // 1st stage to set up the clone step
