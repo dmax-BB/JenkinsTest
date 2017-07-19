@@ -16,7 +16,6 @@ node {
     //processReposToClone(repositoryMapping,reposToClone)
   //}
 
-  stage('clonePreparation') {
   parallel (
     clone1: { cloneCode('origin/master','git@github.com:rails/rails.git','rails') },
     clone2: { cloneCode('origin/master','git@github.com:tensorflow/tensorflow.git','tensorflow') },
@@ -25,7 +24,6 @@ node {
     clone5: { cloneCode('origin/master','git@github.com:facebook/react.git','react') },
     clone6: { cloneCode('origin/master','git@github.com:angular/angular.js.git','angular.js') }
   )
-  }
 
 parallel (
      phase1: { sh "echo p1; echo phase1" },
