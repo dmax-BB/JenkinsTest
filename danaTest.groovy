@@ -19,7 +19,7 @@ node {
         "bootstrap clone": cloneMyRepo("origin/${env.BOOTSTRAP_BRANCH}",'git@github.com:twbs/bootstrap.git','bootstrap'),
         "freeCodeCamp clone": cloneMyRepo("origin/${env.FREECODECAMP_BRANCH}",'git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
         "react clone": cloneMyRepo("origin/${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
-        "angular.js clone": cloneMyRepo("origin/${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js')
+        "angular.js clone": cloneMyRepo("origin/${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js'),
         "NEW WAY": new SourceClone().cloneSourceCode('git@github.com:angular/angular.js.git','angular.js',"$env.DANA_TEST_CREDENTIALS")
       )
  println "before"
