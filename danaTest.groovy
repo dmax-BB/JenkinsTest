@@ -14,17 +14,13 @@ node {
   try{
     stage('CloneRepos') {
       parallel (
-        "rails clone": cloneMyRepo("origin/${env.RAILS_BRANCH}",'git@github.com:rails/rails.git','rails'),
-        "tensorflow clone": cloneMyRepo("origin/${env.TENSORFLOW_BRANCH}",'git@github.com:tensorflow/tensorflow.git','tensorflow'),
-        "bootstrap clone": cloneMyRepo("origin/${env.BOOTSTRAP_BRANCH}",'git@github.com:twbs/bootstrap.git','bootstrap'),
-        "freeCodeCamp clone": cloneMyRepo("origin/${env.FREECODECAMP_BRANCH}",'git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp'),
-        "react clone": cloneMyRepo("origin/${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
-        "angular.js clone": cloneMyRepo("origin/${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js'),
-        "NEW WAY": new SourceClone().cloneSourceCode('git@github.com:angular/angular.js.git','angular.js',"$env.DANA_TEST_CREDENTIALS")
+        "rails clone": new SourceClone().cloneSourceCode('git@github.com:rails/rails.git','rails',"$env.DANA_TEST_CREDENTIALS","$env.RAILS_BRANCH"),
+        "tensorflow clone": new SourceClone().cloneSourceCode('git@github.com:tensorflow/tensorflow.git','tensorflow',"$env.DANA_TEST_CREDENTIALS","$env.TENSORFLOW_BRANCH"),
+        "bootstrap clone": new SourceClone().cloneSourceCode('git@github.com:twbs/bootstrap.git','bootstrap',"$env.DANA_TEST_CREDENTIALS","$env.BOOTSTRAP_BRANCH"),
+        "freeCodeCamp clone": new SourceClone().cloneSourceCode('git@github.com:freeCodeCamp/freeCodeCamp.git','freeCodeCamp',"$env.DANA_TEST_CREDENTIALS","$env.FREECODECAMP_BRANCH"),
+        "react clone": new SourceClone().cloneSourceCode('git@github.com:facebook/react.git','react',"$env.DANA_TEST_CREDENTIALS","$env.REACT_BRANCH"),
+        "angular.js clone": new SourceClone().cloneSourceCode('git@github.com:angular/angular.js.git','angular.js',"$env.DANA_TEST_CREDENTIALS","$env.ANGULARJS_BRANCH")
       )
- println "before"
- new SourceClone().cloneSourceCode('git@github.com:angular/angular.js.git','angular.js',"$env.DANA_TEST_CREDENTIALS")
- println "after"
     }
   } catch (Exception e){
     throw e
