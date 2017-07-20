@@ -20,6 +20,7 @@ node {
         "react clone": cloneMyRepo("origin/${env.REACT_BRANCH}",'git@github.com:facebook/react.git','react'),
         "angular.js clone": cloneMyRepo("origin/${env.ANGULARJS_BRANCH}",'git@github.com:angular/angular.js.git','angular.js')
       )
+ new SourceClone().cloneSourceCode('git@github.com:angular/angular.js.git','angular.js',"$env.DANA_TEST_CREDENTIALS")
     }
   } catch (Exception e){
     throw e
