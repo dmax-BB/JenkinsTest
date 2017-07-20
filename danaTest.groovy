@@ -1,4 +1,5 @@
 @Library('jenkins-pipeline-libraries')
+import com.danasoftware.jenkins.pipeline.libraries.SourceClone
 
 defaultBranch='master'
 if (!env.RAILS_BRANCH){env.RAILS_BRANCH=defaultBranch}
