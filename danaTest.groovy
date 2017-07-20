@@ -1,3 +1,7 @@
+import MyUtils
+def myUtils = new MyUtils()
+myUtils.myTest()
+
 defaultBranch='master'
 if (!env.RAILS_BRANCH){env.RAILS_BRANCH=defaultBranch}
 if (!env.TENSORFLOW_BRANCH){env.TENSORFLOW_BRANCH=defaultBranch}
