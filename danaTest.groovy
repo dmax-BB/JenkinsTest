@@ -6,7 +6,7 @@ if (!env.RAILS_BRANCH){env.RAILS_BRANCH=defaultBranch}
 if (!env.TENSORFLOW_BRANCH){env.TENSORFLOW_BRANCH=defaultBranch}
 if (!env.BOOTSTRAP_BRANCH){env.BOOTSTRAP_BRANCH=defaultBranch}
 if (!env.FREECODECAMP_BRANCH){env.FREECODECAMP_BRANCH=defaultBranch}
-if (!env.REACT_BRANCH){env.REACT_BRANCH=defaultBranch}
+//if (!env.REACT_BRANCH){env.REACT_BRANCH=defaultBranch}
 if (!env.ANGULARJS_BRANCH){env.ANGULARJS_BRANCH=defaultBranch}
 
 node {
