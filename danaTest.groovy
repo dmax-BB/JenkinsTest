@@ -28,19 +28,3 @@ node {
 
 }
 
-// Method to run the actual clone of the repository
-def cloneMyRepo(branchName,targetUrl,targetDir) {
-  return {
-    node {
-      print "$targetDir $targetUrl"
-      sh "echo START clone for ${targetDir}: `date`"
-      checkout scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: "$branchName"]],
-                    userRemoteConfigs: [[credentialsId: "$env.DANA_TEST_CREDENTIALS", url: "${targetUrl}"]],
-                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${targetDir}"]]
-                    ]
-      sh "echo END clone for ${targetDir}: `date`"
-    }
-  }
-}
