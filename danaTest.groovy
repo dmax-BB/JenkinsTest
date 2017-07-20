@@ -1,6 +1,4 @@
-import MyUtils
-def myUtils = new MyUtils()
-myUtils.myTest()
+@Library('jenkins-pipeline-libraries')
 
 defaultBranch='master'
 if (!env.RAILS_BRANCH){env.RAILS_BRANCH=defaultBranch}
