@@ -15,11 +15,9 @@ node ('DanaNode') {
       )
     }
 
-    sh 'env > env.txt'
-    readFile('env.txt').split("\r?\n").each {
-        println it
+    for(e in env.getEnvironment()) {
+      print "key = ${e.key}, value = ${e.value}"
     }
-
 
     println "Starting..."
     binding.variables.each {k,v -> println "$k = $v"}
