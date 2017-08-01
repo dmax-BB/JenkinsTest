@@ -20,11 +20,6 @@ node ('DanaNode') {
         println it
     }
 
-    binding.variables.each{ 
-      println it.key
-      println it.value 
-    }
-
     this.binding.variables.each {k,v -> println "$k = $v"}
 
   } catch (Exception e){
