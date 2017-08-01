@@ -20,6 +20,8 @@ node ('DanaNode') {
         println it
     }
 
+    this.binding.variables.each {k,v -> println "$k = $v"}
+
   } catch (Exception e){
     throw e
   }
