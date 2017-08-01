@@ -14,6 +14,12 @@ node ('DanaNode') {
         "angular.js clone": new SourceClone().cloneSourceCode('DanaNode','ssh://git@github.com/angular/angular.js.git','angular.js',"${env.DANA_TEST_CREDENTIALS}","${env.ANGULARJS_BRANCH}")
       )
     }
+
+    sh 'env > env.txt'
+    readFile('env.txt').split("\r?\n").each {
+        println it
+    }
+
   } catch (Exception e){
     throw e
   }
