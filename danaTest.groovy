@@ -20,10 +20,10 @@ node ('DanaNode') {
         println it
     }
 
-    println this.toString()
 
     println "Starting..."
     binding.variables.each {k,v -> println "$k = $v"}
+    echo "NODE_NAME = ${env.NODE_NAME}"
     println "Ending....."
 
   } catch (Exception e){
