@@ -20,6 +20,8 @@ node ('DanaNode') {
         println it
     }
 
+    println this.toString()
+
     println "Starting..."
     binding.variables.each {k,v -> println "$k = $v"}
     println "Ending....."
