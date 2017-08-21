@@ -1,5 +1,5 @@
 @Library('jenkins-pipeline-libraries')
-import com.danasoftware.jenkins.pipeline.libraries.SourceClone
+import com.danasoftware.jenkins.pipeline.libraries.*
 
 node ('DanaNode') {
   // Run cloning
